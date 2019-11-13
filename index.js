@@ -166,7 +166,9 @@ function processContains(item, list, callback) {
  * [2] Invoking `processDuplicateFree` passing `[1,1,2,2,3]` and `(arr) => arr.length`,
  * should return 3.
 */
-function processDuplicateFree(/* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS */) {
+function processDuplicateFree(list, callback) {
+  let deDupedList = [...new Set(list)];
+  return callback(deDupedList);
   /* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS */
 }
 
@@ -239,12 +241,18 @@ function firstNamesAllCaps(runners) {
 function getRunnersByTShirtSize(runners, tShirtSize) {
   var runnerArray = [];
   runners.forEach(
-    function(runner, tShirtSize) {
+    runner => {if (runner.shirt_size == tShirtSize) {
+      runnerArray.push(runner);
+      
+    }
+  }
+    /*function(runner) {
       if (runner.shirt_size == tShirtSize) {
         runnerArray.push(runner);
+        
       }
         
-    }
+    }*/
   );
   return runnerArray;
   /* CODE HERE */
@@ -260,7 +268,15 @@ function getRunnersByTShirtSize(runners, tShirtSize) {
  * @param runners array of runners like the one inside the /data/runners.js file.
  * @returns a number which is the sum of the donations by all runners.
 */
-function tallyUpDonations(/* CODE HERE */) {
+function tallyUpDonations(runners) {
+  let donations = 0;
+  runners.forEach(
+    function(runner) {
+      donations += runner.donation;           
+      }
+    
+  );
+  return donations;
   /* CODE HERE */
 }
 
@@ -281,13 +297,12 @@ function tallyUpDonations(/* CODE HERE */) {
  * etc
 */
 function counterMaker() {
-  // BROKEN CODE STARTS
-  const count = 0;
+  var count = 0;
   function counter() {
-    ++count
+    return count++;
   }
-  // BROKEN CODE ENDS
-}
+  return counter;
+  } 
 
 /**
  * ### Challenge `counterMakerWithLimit`
@@ -309,9 +324,18 @@ function counterMaker() {
  * counter() // should return 0
  * etc
 */
-function counterMakerWithLimit(/* CODE HERE */) {
-  /* CODE HERE */
-}
+function counterMakerWithLimit(counterMax) {
+  var count = -1;
+  function counter() {
+    count++;
+    if (count > counterMax) {
+      count = 0;
+    }
+    return count;
+   }
+  return counter;
+  }
+
 
 /////////////// END OF CHALLENGE ///////////////
 /////////////// END OF CHALLENGE ///////////////
